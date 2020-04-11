@@ -3,12 +3,12 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-CONCEPTNET_TARGET = data/conceptnet-assertions-5.7.0.csv.gz
+CONCEPTNET_TARGET = demo/data/conceptnet-assertions-5.7.0.csv.gz
 CONCEPTNET_SOURCE = 'https://s3.amazonaws.com/conceptnet/downloads/2019/edges/conceptnet-assertions-5.7.0.csv.gz'
 
-DATABASE_TARGET = data/database.sqlite
-DATABASE_SOURCE = database.py
-DATABASE_DEPEND = app.py models/*.py
+DATABASE_TARGET = demo/data/database.sqlite
+DATABASE_SOURCE = demo/database.py
+DATABASE_DEPEND = demo/app.py demo/models/*.py demo/data/*.csv
 
 .PHONY: all clean
 
@@ -22,4 +22,4 @@ $(CONCEPTNET_TARGET):
 	$(CONCEPTNET_SOURCE)
 
 $(DATABASE_TARGET): $(CONCEPTNET_TARGET) $(DATABASE_SOURCE) $(DATABASE_DEPEND)
-	python $(DATABASE_SOURCE) --conceptnet $(CONCEPTNET_TARGET) --config-dir data/
+	python $(DATABASE_SOURCE) $(CONCEPTNET_TARGET) $(@D)

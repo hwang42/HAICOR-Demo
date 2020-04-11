@@ -9,7 +9,7 @@ from sqlalchemy import (Boolean, Column, Float, ForeignKey, Integer, String,
                         UniqueConstraint)
 from sqlalchemy.orm import relationship
 
-from .common import database
+from app import database
 
 
 class Relation(database.Model):

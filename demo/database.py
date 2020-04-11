@@ -13,22 +13,22 @@ import os
 import re
 import sqlite3 as sqlite
 
-from app import app, database
-from models.assertions import *
-from models.concepts import *
+from app import database, APP_DIRECTORY
+from models.assertions import Assertion, Dataset, License, Relation, Source
+from models.concepts import Concept, Language, PartOfSpeech
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("--conceptnet", type=str,
-                    help="ConceptNet assertions file")
-parser.add_argument("--config-dir", type=str,
-                    help="Directory of ConceptNet configurations")
-parser.add_argument("--commit-size", type=int, default=500000)
 
-INITIALIZATION_SQL = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "initialization.sql")
-TRANSFORMATION_SQL = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "transformation.sql")
+parser.add_argument("conceptnet", action="store", type=str,
+                    help="Compiled ConceptNet assertions file (csv.gz)")
+parser.add_argument("description", action="store", type=str,
+                    help="Directory containing the description files (csv)")
+parser.add_argument("--commit-size", action="store", type=int, default=1000,
+                    help="The batch size of the database commit")
+
+INITIALIZATION_SQL = os.path.join(APP_DIRECTORY, "initialization.sql")
+TRANSFORMATION_SQL = os.path.join(APP_DIRECTORY, "transformation.sql")
 
 ENGLISH_REGEX = re.compile(r"^/a/\[/r/.+/,/c/en/.+/,/c/en/.+/\]$")
 CONCEPT_REGEX = re.compile(r"^/c/([^/]+)/([^/]+)/?([^/]+)?/?(.+)?$")
@@ -36,9 +36,9 @@ CONCEPT_REGEX = re.compile(r"^/c/([^/]+)/([^/]+)/?([^/]+)?/?(.+)?$")
 if __name__ == "__main__":
     args = parser.parse_args()
 
-    LANGUAGE_FILE = os.path.join(args.config_dir, "languages.csv")
-    RELATION_FILE = os.path.join(args.config_dir, "relations.csv")
-    PART_OF_SPEECH_FILE = os.path.join(args.config_dir, "part-of-speeches.csv")
+    LANGUAGE = os.path.join(args.description, "languages.csv")
+    RELATION = os.path.join(args.description, "relations.csv")
+    PART_OF_SPEECH = os.path.join(args.description, "part-of-speeches.csv")
 
     # process data using in-memory database
     with sqlite.connect(":memory:") as temp_database:
@@ -49,21 +49,21 @@ if __name__ == "__main__":
             cursor.executescript(script.read())
             temp_database.commit()
 
-        with open(LANGUAGE_FILE, "r") as file:
+        with open(LANGUAGE, "r") as file:
             for language in csv.reader(file):
                 cursor.execute(
                     "INSERT INTO languages(code, name) VALUES(?,?)",
                     language
                 )
 
-        with open(RELATION_FILE, "r") as file:
+        with open(RELATION, "r") as file:
             for relation, directed in csv.reader(file):
                 cursor.execute(
                     "INSERT INTO relations(relation, directed) VALUES(?,?)",
                     (relation, directed == "directed")
                 )
 
-        with open(PART_OF_SPEECH_FILE, "r") as file:
+        with open(PART_OF_SPEECH, "r") as file:
             for part_of_speech in csv.reader(file):
                 cursor.execute(
                     "INSERT INTO part_of_speeches(code, name) VALUES(?,?)",
@@ -114,50 +114,49 @@ if __name__ == "__main__":
             temp_database.commit()
 
         # populate app database
-        with app.app_context():
-            database.drop_all()
-            database.create_all()
+        database.drop_all()
+        database.create_all()
 
-            for r in cursor.execute("SELECT * FROM languages"):
-                database.session.add(Language(**r))
+        for r in cursor.execute("SELECT * FROM languages"):
+            database.session.add(Language(**r))
 
-            for r in cursor.execute("SELECT * FROM relations"):
-                database.session.add(Relation(**r))
+        for r in cursor.execute("SELECT * FROM relations"):
+            database.session.add(Relation(**r))
 
-            for r in cursor.execute("SELECT * FROM part_of_speeches"):
-                database.session.add(PartOfSpeech(**r))
+        for r in cursor.execute("SELECT * FROM part_of_speeches"):
+            database.session.add(PartOfSpeech(**r))
 
-            for r in cursor.execute("SELECT * FROM datasets"):
-                database.session.add(Dataset(**r))
+        for r in cursor.execute("SELECT * FROM datasets"):
+            database.session.add(Dataset(**r))
 
-            for r in cursor.execute("SELECT * FROM licenses"):
-                database.session.add(License(**r))
+        for r in cursor.execute("SELECT * FROM licenses"):
+            database.session.add(License(**r))
 
-            for i, r in enumerate(cursor.execute("SELECT * FROM concepts")):
-                print(f"{i + 1} concepts inserted", end='\r')
-                database.session.add(Concept(**r))
+        for i, r in enumerate(cursor.execute("SELECT * FROM concepts")):
+            print(f"{i + 1} concepts inserted", end='\r')
+            database.session.add(Concept(**r))
 
-                if (i + 1) % args.commit_size == 0:
-                    database.session.commit()
+            if (i + 1) % args.commit_size == 0:
+                database.session.commit()
 
-            print()
+        print()
 
-            for i, r in enumerate(cursor.execute("SELECT * FROM assertions")):
-                print(f"{i + 1} assertions inserted", end='\r')
-                database.session.add(Assertion(**r))
+        for i, r in enumerate(cursor.execute("SELECT * FROM assertions")):
+            print(f"{i + 1} assertions inserted", end='\r')
+            database.session.add(Assertion(**r))
 
-                if (i + 1) % args.commit_size == 0:
-                    database.session.commit()
+            if (i + 1) % args.commit_size == 0:
+                database.session.commit()
 
-            print()
+        print()
 
-            for i, r in enumerate(cursor.execute("SELECT * FROM sources")):
-                print(f"{i + 1} assertion source inserted", end='\r')
-                database.session.add(Source(**r))
+        for i, r in enumerate(cursor.execute("SELECT * FROM sources")):
+            print(f"{i + 1} assertion source inserted", end='\r')
+            database.session.add(Source(**r))
 
-                if (i + 1) % args.commit_size == 0:
-                    database.session.commit()
+            if (i + 1) % args.commit_size == 0:
+                database.session.commit()
 
-            print()
+        print()
 
-            database.session.commit()
+        database.session.commit()
