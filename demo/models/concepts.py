@@ -8,7 +8,7 @@ from __future__ import annotations
 from sqlalchemy import Column, ForeignKey, Integer, String, UniqueConstraint
 from sqlalchemy.orm import relationship
 
-from app import database
+from ..app import database
 
 
 class Language(database.Model):

@@ -13,9 +13,9 @@ import os
 import re
 import sqlite3 as sqlite
 
-from app import database, APP_DIRECTORY
-from models.assertions import Assertion, Dataset, License, Relation, Source
-from models.concepts import Concept, Language, PartOfSpeech
+from .app import database, APP_DIRECTORY
+from .models.assertions import Assertion, Dataset, License, Relation, Source
+from .models.concepts import Concept, Language, PartOfSpeech
 
 parser = argparse.ArgumentParser()
 

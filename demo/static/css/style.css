@@ -1,0 +1,63 @@
+/**
+ * Copyright (c) 2020 Hecong Wang
+ * 
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+.highlight {
+    border: dashed 0.15rem black;
+    padding: 1rem;
+    user-select: none;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.highlight p {
+    margin: 0rem;
+}
+
+.highlight div {
+    display: inline;
+}
+
+.highlight div::after {
+    content: " ";
+}
+
+.highlight span {
+    padding: 0.1rem;
+    border-radius: 0.4rem;
+}
+
+.highlight span.unselected {
+    color: inherit;
+    background-color: inherit;
+}
+
+.highlight span.selected {
+    color: #fff;
+    background-color: #9b4dca;
+}
+
+.highlight span.important {
+    color: #fff;
+    background-color: #9b4dca;
+}
+
+.highlight span.related {
+    color: #fff;
+    background-color: palevioletred;
+}
+
+.highlight span.useless {
+    color: #fff;
+    background-color: gray;
+}
+
+#highlight-legend span {
+    color: #fff;
+    margin: 0.1rem;
+    padding: 0.1rem;
+    border-radius: 0.4rem;
+}

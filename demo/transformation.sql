@@ -1,6 +1,6 @@
 -- Transform in-memory ConceptNet SQLite database
 INSERT INTO concepts(lang, text, speech, suffix)
-SELECT DISTINCT lang, text, speech, suffix
+SELECT DISTINCT languages.id, text, part_of_speeches.id, suffix
 FROM (SELECT source_lang AS lang,
              source_text AS text,
              source_speech AS speech,

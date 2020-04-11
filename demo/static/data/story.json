@@ -1,0 +1,269 @@
+{
+    "lines": [
+        {
+            "index": 0,
+            "words": [
+                {
+                    "index": 0,
+                    "content": "Jon",
+                    "vocabulary": true
+                },
+                {
+                    "index": 1,
+                    "content": "has",
+                    "vocabulary": true
+                },
+                {
+                    "index": 2,
+                    "content": "a",
+                    "vocabulary": true
+                },
+                {
+                    "index": 3,
+                    "content": "big",
+                    "vocabulary": true
+                },
+                {
+                    "index": 4,
+                    "content": "math",
+                    "vocabulary": true
+                },
+                {
+                    "index": 5,
+                    "content": "test",
+                    "vocabulary": true
+                },
+                {
+                    "index": 6,
+                    "content": "in",
+                    "vocabulary": true
+                },
+                {
+                    "index": 7,
+                    "content": "the",
+                    "vocabulary": true
+                },
+                {
+                    "index": 8,
+                    "content": "morning",
+                    "vocabulary": true
+                },
+                {
+                    "index": 9,
+                    "content": ".",
+                    "vocabulary": false
+                }
+            ]
+        },
+        {
+            "index": 1,
+            "words": [
+                {
+                    "index": 0,
+                    "content": "Decided",
+                    "vocabulary": true
+                },
+                {
+                    "index": 1,
+                    "content": "he",
+                    "vocabulary": true
+                },
+                {
+                    "index": 2,
+                    "content": "didn't",
+                    "vocabulary": true
+                },
+                {
+                    "index": 3,
+                    "content": "need",
+                    "vocabulary": true
+                },
+                {
+                    "index": 4,
+                    "content": "to",
+                    "vocabulary": true
+                },
+                {
+                    "index": 5,
+                    "content": "study",
+                    "vocabulary": true
+                },
+                {
+                    "index": 6,
+                    "content": ".",
+                    "vocabulary": false
+                }
+            ]
+        },
+        {
+            "index": 2,
+            "words": [
+                {
+                    "index": 0,
+                    "content": "When",
+                    "vocabulary": true
+                },
+                {
+                    "index": 1,
+                    "content": "he",
+                    "vocabulary": true
+                },
+                {
+                    "index": 2,
+                    "content": "got",
+                    "vocabulary": true
+                },
+                {
+                    "index": 3,
+                    "content": "to",
+                    "vocabulary": true
+                },
+                {
+                    "index": 4,
+                    "content": "class,",
+                    "vocabulary": true
+                },
+                {
+                    "index": 5,
+                    "content": "he",
+                    "vocabulary": true
+                },
+                {
+                    "index": 6,
+                    "content": "felt",
+                    "vocabulary": true
+                },
+                {
+                    "index": 7,
+                    "content": "confident",
+                    "vocabulary": true
+                },
+                {
+                    "index": 8,
+                    "content": ".",
+                    "vocabulary": false
+                }
+            ]
+        },
+        {
+            "index": 3,
+            "words": [
+                {
+                    "index": 0,
+                    "content": "His",
+                    "vocabulary": true
+                },
+                {
+                    "index": 1,
+                    "content": "teacher",
+                    "vocabulary": true
+                },
+                {
+                    "index": 2,
+                    "content": "gave",
+                    "vocabulary": true
+                },
+                {
+                    "index": 3,
+                    "content": "out",
+                    "vocabulary": true
+                },
+                {
+                    "index": 4,
+                    "content": "the",
+                    "vocabulary": true
+                },
+                {
+                    "index": 5,
+                    "content": "test",
+                    "vocabulary": true
+                },
+                {
+                    "index": 6,
+                    "content": "and",
+                    "vocabulary": true
+                },
+                {
+                    "index": 7,
+                    "content": "he",
+                    "vocabulary": true
+                },
+                {
+                    "index": 8,
+                    "content": "started",
+                    "vocabulary": true
+                },
+                {
+                    "index": 9,
+                    "content": "filling",
+                    "vocabulary": true
+                },
+                {
+                    "index": 10,
+                    "content": "out",
+                    "vocabulary": true
+                },
+                {
+                    "index": 11,
+                    "content": "answers",
+                    "vocabulary": true
+                },
+                {
+                    "index": 12,
+                    "content": ".",
+                    "vocabulary": false
+                }
+            ]
+        },
+        {
+            "index": 4,
+            "words": [
+                {
+                    "index": 0,
+                    "content": "Jon",
+                    "vocabulary": true
+                },
+                {
+                    "index": 1,
+                    "content": "was",
+                    "vocabulary": true
+                },
+                {
+                    "index": 2,
+                    "content": "excited",
+                    "vocabulary": true
+                },
+                {
+                    "index": 3,
+                    "content": "when",
+                    "vocabulary": true
+                },
+                {
+                    "index": 4,
+                    "content": "he",
+                    "vocabulary": true
+                },
+                {
+                    "index": 5,
+                    "content": "made",
+                    "vocabulary": true
+                },
+                {
+                    "index": 6,
+                    "content": "an",
+                    "vocabulary": true
+                },
+                {
+                    "index": 7,
+                    "content": "A",
+                    "vocabulary": true
+                },
+                {
+                    "index": 8,
+                    "content": ".",
+                    "vocabulary": false
+                }
+            ]
+        }
+    ]
+}
