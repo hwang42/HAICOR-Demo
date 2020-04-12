@@ -1,0 +1,18 @@
+/**
+ * Copyright (c) 2020 Hecong Wang
+ * 
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+div.story-highlight {
+    user-select: none;
+}
+
+div.story-highlight div {
+    display: inline;
+}
+
+div.story-highlight div::after {
+    content: " ";
+}

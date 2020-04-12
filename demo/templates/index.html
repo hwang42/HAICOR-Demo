@@ -14,7 +14,7 @@
     <title>HAICOR User Interface Demo</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/story-highlight.css')}}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.1/d3.min.js"></script>
@@ -31,7 +31,7 @@
             <div class="col s12 l6">
                 <h3>Basic</h3>
                 <div class="card">
-                    <div class="card-content highlight">
+                    <div class="card-content flow-text">
                         <div id="highlight-basic"></div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
             <div class="col s12 l6">
                 <h3>Advanced</h3>
                 <div class="card">
-                    <div class="card-content highlight">
+                    <div class="card-content flow-text">
                         <div id="highlight-advanced"></div>
                     </div>
                 </div>
@@ -51,6 +51,9 @@
         <div id="path-ranking"></div>
 
         <h2>Path Generation</h2>
+
+        <div id="graph"></div>
+        <button class="btn" id="new-node"></button>
 
         <div class="row">
             <div class="input-field col s12 l8">
@@ -76,28 +79,40 @@
                 </div>
             </div>
         </div>
-
-        <div id="path-generation"></div>
     </div>
 
-    <script src="{{url_for('static', filename='js/highlight.js')}}"></script>
-    <script src="{{url_for('static', filename='js/concept.js')}}"></script>
-    <script>
+    <script type="module">
+        import { StoryHighlight } from "{{url_for('static', filename='js/story-highlight.js')}}";
+        import { KnowledgeGraph } from "{{url_for('static', filename='js/knowledge-graph.js')}}";
+        import { ConceptSelection } from "{{url_for('static', filename='js/concept-selection.js')}}";
+
         document.addEventListener('DOMContentLoaded', function () {
             M.FormSelect.init(document.querySelectorAll('select'), {});
         });
 
-        var simple = new Highlight(
-            "div#highlight-basic",
-            ["none", "white-text deep-orange z-depth-5"],
-            "{{url_for('static', filename='data/story.json')}}"
+        var basic = new StoryHighlight(
+            "#highlight-basic",
+            ["", "white-text deep-orange z-depth-5"]
         );
-        var advanced = new Highlight(
-            "div#highlight-advanced",
-            ["unselected", "white-text deep-orange z-depth-5", "white-text yellow z-depth-3", "white-text grey z-depth-1"],
-            "{{url_for('static', filename='data/story.json')}}"
+
+        basic.initialize("{{url_for('static', filename='data/story.json')}}")
+
+        var advanced = new StoryHighlight(
+            "#highlight-advanced",
+            ["", "white-text deep-orange z-depth-5", "white-text yellow z-depth-3", "white-text grey z-depth-1"]
         );
-        var concept = new Concept("concept-text", "concept-speech", 300);
+
+        advanced.initialize("{{url_for('static', filename='data/story.json')}}")
+
+        var graph = new KnowledgeGraph("#graph");
+
+        var concept = new ConceptSelection("concept-text", "concept-speech", 100);
+
+        document.getElementById("new-node").addEventListener("click", function () {
+            graph.add_node(0);
+        })
+
+        export { basic, advanced, graph, concept };
     </script>
 </body>
 

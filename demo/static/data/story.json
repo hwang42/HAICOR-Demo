@@ -120,26 +120,31 @@
                 },
                 {
                     "index": 4,
-                    "content": "class,",
+                    "content": "class",
                     "vocabulary": true
                 },
                 {
                     "index": 5,
-                    "content": "he",
+                    "content": ",",
                     "vocabulary": true
                 },
                 {
                     "index": 6,
-                    "content": "felt",
+                    "content": "he",
                     "vocabulary": true
                 },
                 {
                     "index": 7,
-                    "content": "confident",
+                    "content": "felt",
                     "vocabulary": true
                 },
                 {
                     "index": 8,
+                    "content": "confident",
+                    "vocabulary": true
+                },
+                {
+                    "index": 9,
                     "content": ".",
                     "vocabulary": false
                 }
