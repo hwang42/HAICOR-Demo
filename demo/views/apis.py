@@ -6,19 +6,21 @@
 from flask import jsonify
 
 from ..app import app, database
-from ..models.concepts import Concept, PartOfSpeech
+from ..models.concepts import Concept
 
 
-@app.route("/api/complete/<string:text>")
-def complete(text: str) -> str:
-    speech = database.session.query(PartOfSpeech)
-
-    speech = {i.id: i.code for i in speech}
-    speech[None] = None
-
-    concept = database.session.query(Concept.text, Concept.speech)\
+@app.route("/api/text/<string:text>")
+def concept_text(text: str) -> str:
+    concepts = database.session.query(Concept.text)\
         .filter(Concept.text.contains(text)).distinct()
 
-    concept = ({"text": i.text, "speech": speech[i.speech]} for i in concept)
+    return jsonify({c.text.replace('_', ' '): None for c in concepts})
 
-    return jsonify({"concepts": tuple(concept)})
+
+@app.route("/api/speech/<string:text>")
+def concept_speech(text: str) -> str:
+    concepts = database.session.query(Concept)\
+        .filter(Concept.text == text).distinct(Concept.speech)
+    speeches = (c.part_of_speech.code if c.speech else ' ' for c in concepts)
+
+    return jsonify({text: tuple(set(speeches))})

@@ -26,7 +26,7 @@ class Highlight {
             }
         }
 
-        this.content.append("p").selectAll("span")
+        this.content.append("p").classed("flow-text", true).selectAll("span")
             .data(this.story, data => (data.line, data.index))
             .enter()
             .append("div")
